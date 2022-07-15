@@ -446,6 +446,23 @@
     <script>
       AOS.init();
     </script>
-
+                                                            <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbwqgEjDSOc6ufMUjX8l5izQsqU01EK2nu--_iPTiCi7hlm6iRKp53cZ8sK1oDJVbt3L/exec'
+      const form = document.forms['submit-to-google-sheet']
+      const status = document.getElementById('status')
+    
+      form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => {
+            status.innerHTML = "Message Sent Successfully"
+            setTimeout(function(){
+              status.innerHTML = ""
+            },5000)
+            form.reset()
+          })
+          .catch(error => console.error('Error!', error.message))
+      })
+    </script>
   </body>
 </html>
